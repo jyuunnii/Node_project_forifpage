@@ -1,0 +1,21 @@
+.menu_list{
+  width: 200px;
+  position: absolute;
+  left: 0px;
+}
+.menu_list ul li{
+  list-style: none;
+  margin-bottom: 5px;
+}
+.contents{
+  margin-left: 150px;
+  margin-top: 30px;
+}
+.img{
+  width:400px;
+}
+.chats{
+  position: absolute;
+  right:80px;
+  top:50px;
+}

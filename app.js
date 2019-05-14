@@ -3,6 +3,8 @@ const path=require('path')
 const logger=require('morgan')
 const app=express()
 const data=require('./data.json')
+const titledata=require('./titledata.json')
+const imagedata=require('./imagedata.json')
 
 //middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,28 +20,33 @@ app.get('/', (req,res,err)=>{
   res.redirect('/home')
 })
 //set route
+
 app.get('/home', (req,res,err)=>{
   res.render('index',{
-    title: 'FORIF-Programming Club',
-    content: data.home
+    title: titledata.home,
+    content: data.home,
+    image:imagedata.home
   })
 })
 app.get('/history', (req,res,err)=>{
   res.render('index',{
-    title: 'FORIF-Programming Club-History',
-    content: data.history
+    title: titledata.history,
+    content: data.history,
+    image:imagedata.history
   })
 })
 app.get('/study', (req,res,err)=>{
   res.render('index',{
-    title: 'FORIF-Programming Club-Study',
-    content: data.study
+    title: titledata.study,
+    content: data.study,
+    image:imagedata.study
   })
 })
 app.get('/rules', (req,res,err)=>{
   res.render('index',{
-    title: 'FORIF-Programming Club-Rules',
-    content: data.rules
+    title: titledata.rules,
+    content: data.rules,
+    image:imagedata.rules
   })
 })
 
