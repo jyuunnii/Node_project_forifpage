@@ -4,21 +4,10 @@ const logger=require('morgan')
 const app=express()
 const data=require('./data.json')
 const mongoose=require('mongoose')
+const connect=require('./schemas')
 
-
-function connect(){
-  mongoose.set('debug', true) //개발중인 모드임을 암시
-  mongoose.connect('mongodb://root@localhost:27017/',{
-    dbName: 'ajax-tutorial'
-  }, function(error){
-    if(error){
-      console.error('MongoDB connction error: ', error)
-    }else{
-      console.log('MongoDB connected!')
-    }
-  })
-}
-connect()
+const dbPort=27017
+connect(dbPort)
 
 const Content=require('./schemas/content.js')
 
@@ -44,37 +33,38 @@ app.get('/', (req,res,err)=>{
 })
 //set route
 app.get('/home', (req,res,err)=>{
-  res.render('index',{
-    title: 'FORIF-Programming Club',
-    content: data.home
+  Content.findOne({ pageId: 'home' }, (err, content) => {
+    res.render('index.ejs', {
+      title: content.pageName,
+      content: content.pageContent
+    })
   })
 })
 app.get('/history', (req,res,err)=>{
-  res.render('index',{
-    title: 'FORIF-Programming Club-History',
-    content: data.history
+  Content.findOne({ pageId: 'history' }, (err, content) => {
+    res.render('index.ejs', {
+      title: content.pageName,
+      content: content.pageContent
+    })
   })
 })
 app.get('/study', (req,res,err)=>{
-  res.render('index',{
-    title: 'FORIF-Programming Club-Study',
-    content: data.study
+  Content.findOne({ pageId: 'study' }, (err, content) => {
+  res.render('index.ejs', {
+    title: content.pageName,
+    content: content.pageContent
   })
 })
+})
 app.get('/rules', (req,res,err)=>{
-  res.render('index',{
-    title: 'FORIF-Programming Club-Rules',
-    content: data.rules
+  Content.findOne({ pageId: 'rules' }, (err, content) => {
+  res.render('index.ejs', {
+    title: content.pageName,
+    content: content.pageContent
   })
+})
 })
 
 app.listen(8000, ()=>{
   console.log('8000번 포트에서 대기중')
-  const newContent=new Content({
-    pageId: "temp",
-    pageTitle:"temp"
-  })
-  newContent.save((err, content)=>{
-    console.log('방금 DB에 저장된 데이터의 제목:'+content.pageId)
-  }) //db에 실제 반영
 });

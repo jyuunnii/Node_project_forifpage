@@ -3,22 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="/css/index.css">
   </head>
   <body>
-    <div class="menu_list">
-      <%- include('header') %>
-    </div>
-    <div class="contents">
-      <h3><%= title %></h3>
-      <p><%= content %></p>
-      <img src="<%= image%>" alt="" width="400px">
-    </div>
-    <div class="chats">
-      <%- include('qna') %>
-    </div>
-
-
+    <%- include('header') %>
+    <h2>FORIF - <%= title %></h2>
+    <p><%= content %></p>
   </body>
-  <footer><%- include('footer') %></footer>
 </html>
